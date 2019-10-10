@@ -12,7 +12,7 @@
 	<groupId>com.channel</groupId>
 	<artifactId>content</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>stock</name>
+	<name>content</name>
 	<description></description>
 
 	<properties>
@@ -99,7 +99,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<finalName>stock</finalName>
+		<finalName>content</finalName>
 	</build>
 
 	<repositories>
