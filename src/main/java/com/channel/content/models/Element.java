@@ -4,9 +4,12 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -36,6 +39,12 @@ public class Element extends AbstractAudit {
 
     @ManyToMany(mappedBy = "elements")
     private Set<Tab> tabs;
+
+    @ManyToOne(
+        fetch = FetchType.LAZY
+    )
+    @JoinColumn( name = "table_id", nullable = true )
+    private com.channel.content.models.Table table;
 
     /**
      * @return Long return the id
@@ -105,5 +114,19 @@ public class Element extends AbstractAudit {
      */
     public void setTabs(Set<Tab> tabs) {
         this.tabs = tabs;
+    }
+
+    /**
+     * @return com.channel.content.models.Table return the table
+     */
+    public com.channel.content.models.Table getTable() {
+        return table;
+    }
+
+    /**
+     * @param table the table to set
+     */
+    public void setTable(com.channel.content.models.Table table) {
+        this.table = table;
     }
 }
