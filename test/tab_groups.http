@@ -1,0 +1,30 @@
+@local = localhost:8080
+@remote = 192.168.0.6:8080
+@enviroment = {{local}}
+
+###
+
+GET http://{{enviroment}}/profile/elements HTTP/1.1
+
+###
+
+GET http://{{enviroment}}/elements HTTP/1.1
+
+###
+
+POST http://{{enviroment}}/elements HTTP/1.1
+content-type: application/json
+
+{
+    "className": "product",
+    "attributeName": "description",
+    "type": "text"
+}
+
+###
+
+# POST http://{{enviroment}}/products/search/findOneByCode HTTP/1.1
+
+# {
+#     "code": 1234
+# }

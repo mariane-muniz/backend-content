@@ -1,0 +1,49 @@
+@local = localhost:8080
+@remote = 192.168.0.6:8080
+@enviroment = {{local}}
+
+###
+
+GET http://{{enviroment}}/profile/tabs HTTP/1.1
+
+###
+
+GET http://{{enviroment}}/tabs HTTP/1.1
+
+###
+
+
+
+
+
+
+
+GET http://localhost:8080/tabs/1101/elements
+
+### Validar porque  quando roda o comando abaixo ao executar http://localhost:8080/tabs/1202/elements entra em looping
+
+POST http://localhost:8080/tabs HTTP/1.1
+content-type: application/json
+
+{
+    "code": "product_main2",
+    "title": "Main2",
+    "elements": [
+        "http://{{enviroment}}/elements/1051"
+    ]
+}
+
+###
+
+
+
+
+
+
+
+
+POST http://{{enviroment}}/products/search/findOneByCode HTTP/1.1
+
+{
+    "code": 1234
+}

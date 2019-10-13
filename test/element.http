@@ -1,0 +1,51 @@
+@local = localhost:8080
+@remote = 192.168.0.6:8080
+@enviroment = {{local}}
+
+###
+
+GET http://{{enviroment}}/profile/elements HTTP/1.1
+
+###
+
+POST http://{{enviroment}}/elements HTTP/1.1
+content-type: application/json
+
+{
+    "code": "category"
+}
+
+
+
+
+
+###
+GET http://{{enviroment}}/elements/1051 HTTP/1.1
+
+###
+
+PUT http://{{enviroment}}/elements/1051 HTTP/1.1
+
+{
+    "code": "category",
+    "className": "product",
+    "attributeName": "name",
+    "type": "string",
+    "tab": ["http://localhost:8080/tabs/1101"]
+}
+
+
+
+
+
+
+
+
+
+###
+
+POST http://{{enviroment}}/products/search/findOneByCode HTTP/1.1
+
+{
+    "code": 1234
+}

@@ -1,18 +1,23 @@
 package com.channel.content.models;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table( name = "links" )
-public class Link extends AbstractAudit {
+@Table( name = "tab_groups" )
+public class TabGroup extends AbstractAudit {
 
     @Id
     @GeneratedValue(generator = "question_generator")
@@ -26,11 +31,11 @@ public class Link extends AbstractAudit {
     @Column( nullable = false, unique = true )
     private String code;
 
-    @Column( nullable = false )
-    private String title;
-
-    @Column( nullable = false )
-    private String url;
-
-    private boolean external;
+    @ManyToMany
+    @JoinTable(
+        name = "tab_group_rel",
+        joinColumns = @JoinColumn(name = "tab_group_id"),
+        inverseJoinColumns = @JoinColumn(name = "tab_id")
+    )
+    private Set<Tab> tabs;
 }
