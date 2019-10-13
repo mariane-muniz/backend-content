@@ -20,17 +20,16 @@ content-type: application/json
 
 
 ###
-GET http://{{enviroment}}/elements/1051 HTTP/1.1
+GET http://{{enviroment}}/elements HTTP/1.1
 
 ###
 
 PUT http://{{enviroment}}/elements/1051 HTTP/1.1
 
 {
-    "code": "category",
     "className": "product",
-    "attributeName": "name",
-    "type": "string",
+    "attributeName": "status",
+    "type": "boolean",
     "tab": ["http://localhost:8080/tabs/1101"]
 }
 

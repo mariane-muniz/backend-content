@@ -20,8 +20,9 @@ GET http://{{enviroment}}/tabs HTTP/1.1
 
 GET http://localhost:8080/tabs/1101/elements
 
-### Validar porque  quando roda o comando abaixo ao executar http://localhost:8080/tabs/1202/elements entra em looping
 
+
+### Validar porque  quando roda o comando abaixo ao executar http://localhost:8080/tabs/1202/elements entra em looping
 POST http://localhost:8080/tabs HTTP/1.1
 content-type: application/json
 
@@ -35,11 +36,27 @@ content-type: application/json
 
 ###
 
+PUT http://localhost:8080/tabs/1202 HTTP/1.1
+content-type: application/json
+
+{
+    "code": "product_main2",
+    "title": "Main2",
+    "elements": [
+        "http://{{enviroment}}/elements/1052"
+    ]
+}
 
 
 
 
 
+
+
+
+
+
+###
 
 
 POST http://{{enviroment}}/products/search/findOneByCode HTTP/1.1

@@ -1,0 +1,24 @@
+@local = localhost:8080
+@remote = 192.168.0.6:8080
+@enviroment = {{local}}
+
+###
+
+GET http://{{enviroment}}/profile/tables HTTP/1.1
+
+
+###
+GET http://{{enviroment}}/tables HTTP/1.1
+
+
+###
+POST http://{{enviroment}}/tables HTTP/1.1
+
+{
+    "className": "product",
+    "columns": [
+        "http://localhost:8080/elements/1251",
+        "http://localhost:8080/elements/1252",
+        "http://localhost:8080/elements/1253"
+    ]
+}
