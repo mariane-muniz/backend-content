@@ -59,7 +59,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.mariane-muniz</groupId>
-			<artifactId>backend-catalog</artifactId>
+			<artifactId>catalog</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
