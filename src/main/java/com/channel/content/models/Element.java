@@ -14,36 +14,33 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "elements" )
+@Table(name = "elements")
 public class Element extends AbstractAudit {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(generator = "question_generator")
-    @SequenceGenerator(
-        name = "question_generator",
-        sequenceName = "question_sequence",
-        initialValue = 1000
-    )
+    @SequenceGenerator(name = "question_generator", sequenceName = "question_sequence", initialValue = 1000)
     private Long id;
 
-    @Column( nullable = false, name = "class_name" )
+    @Column(nullable = false, name = "class_name")
     private String className;
 
-    @Column( nullable = false, name = "attr_name" )
+    @Column(nullable = false, name = "attr_name")
     private String attributeName;
 
-    @Column( nullable = false )
+    @Column(nullable = false)
     private String type;
+
+    @Column( nullable = false )
+    private String publicName;
 
     @ManyToMany(mappedBy = "elements")
     private Set<Tab> tabs;
 
-    @ManyToOne(
-        fetch = FetchType.LAZY
-    )
-    @JoinColumn( name = "table_id", nullable = true )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "table_id", nullable = true)
     private com.channel.content.models.Table table;
 
     /**
@@ -51,6 +48,14 @@ public class Element extends AbstractAudit {
      */
     public Long getId() {
         return id;
+    }
+
+    public String getPublicName() {
+        return publicName;
+    }
+
+    public void setPublicName(String publicName) {
+        this.publicName = publicName;
     }
 
     /**

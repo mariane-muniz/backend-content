@@ -1,8 +1,6 @@
-package com.channel.content.controllers.services.impl;
+package com.channel.content.services.impl;
 
-import java.util.List;
-
-import com.channel.content.controllers.services.CatalogWebService;
+import com.channel.content.services.CatalogWebService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
