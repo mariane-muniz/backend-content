@@ -19,6 +19,7 @@ import com.channel.content.models.Table;
 import com.channel.content.repositories.TableRepository;
 import com.channel.content.services.CatalogWebService;
 import com.channel.content.services.JsonService;
+import com.channel.content.services.TableService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,9 @@ public class DefaultTableFacade implements TableFacade {
 
     @Resource
     private JsonService jsonService;
+
+    @Resource
+    private TableService tableService;
 
     @Override
     public EntityData getList(final String entityName) {
@@ -76,6 +80,7 @@ public class DefaultTableFacade implements TableFacade {
                 data.setDetail(elementList);
             }
             data.setResult(list);
+            data.setLabels(this.tableService.getLabels(entity));
             return data;
         }
         return null;
