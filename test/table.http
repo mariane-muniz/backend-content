@@ -22,3 +22,7 @@ POST http://{{enviroment}}/tables HTTP/1.1
         "http://localhost:8080/elements/1253"
     ]
 }
+
+
+###
+GET http://{{enviroment}}/list/product HTTP/1.1

@@ -31,7 +31,6 @@ public class DefaultCatalogWebService implements CatalogWebService {
             // .queryParam("attributes", lineAttributes);
         HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity,
                 String.class);
-        logger.error(response.toString());
 
         return response.getBody();
     }

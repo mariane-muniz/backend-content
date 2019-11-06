@@ -1,30 +1,65 @@
 package com.channel.content.services.impl;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
+import com.channel.content.dtos.ColumnData;
+import com.channel.content.factories.impl.OfficeUiTableColumnFactory;
 import com.channel.content.models.Element;
 import com.channel.content.models.Table;
+import com.channel.content.repositories.TableRepository;
+import com.channel.content.services.CatalogWebService;
 import com.channel.content.services.TableService;
+import com.channel.content.strategies.JsonEntityToMapStrategy;
 
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 @Component("tableService")
 public class DefaultTableService implements TableService {
 
+    @Resource
+    private OfficeUiTableColumnFactory officeUiTableColumnFactory;
+
+    @Resource
+    private CatalogWebService CatalogWebService;
+
+    @Resource
+    private JsonEntityToMapStrategy jsonEntityToMapStrategy;
+
+    @Resource
+    private TableRepository tableRepository;
+
     @Override
-    public Map<String, String> getLabels(final Table entity) {
+    public Table findOneByClassName(final String entityName) {
+        return this.tableRepository.findOneByClassName(entityName);
+    }
 
-        final Map<String, String> map = new HashMap<>();
-        final Set<Element> columns = entity.getColumns();
-
-        if (!CollectionUtils.isEmpty(columns)) {
-            for (final Element column : columns) {
-                map.put(column.getAttributeName(), column.getPublicName());
-            }
+    @Override
+    public List<ColumnData> getTableHeader(final Table table) {
+        List<ColumnData> list = new ArrayList<>();
+        final Set<Element> columns = table.getColumns();
+        int counter = 1;
+        for (final Element column : columns) {
+            final ColumnData columnData = 
+                this.officeUiTableColumnFactory.create(column, counter);
+            list.add(columnData);
+            counter++;
         }
-        return map;
+        return list;
+    }
+
+    @Override
+    public List<Map<String, Object>> getTableValues(final Table table) {
+        final String entityName = table.getClassName();
+        final String elements = this.CatalogWebService.getCatalogElements(entityName);
+        if (!StringUtils.isEmpty(elements)) {
+            return this.jsonEntityToMapStrategy.convert(elements, table);
+        }
+        return null;
     }
 }

@@ -2,6 +2,7 @@ package com.channel.content.models;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -42,6 +44,23 @@ public class Element extends AbstractAudit {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "table_id", nullable = true)
     private com.channel.content.models.Table table;
+
+
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        mappedBy = "element"
+    )
+    private Set<OfficeUiColumn> columns;
+    
+
+    public Set<OfficeUiColumn> getColumns() {
+        return this.columns;
+    }
+
+    public void setColumns(final Set<OfficeUiColumn> columns) {
+        this.columns = columns;
+    }
 
     /**
      * @return Long return the id
