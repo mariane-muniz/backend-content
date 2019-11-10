@@ -45,112 +45,131 @@ public class Element extends AbstractAudit {
     @JoinColumn(name = "table_id", nullable = true)
     private com.channel.content.models.Table table;
 
-
     @OneToMany(
         fetch = FetchType.LAZY,
         cascade = CascadeType.ALL,
         mappedBy = "element"
     )
     private Set<OfficeUiColumn> columns;
-    
 
-    public Set<OfficeUiColumn> getColumns() {
-        return this.columns;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "web_service_id", nullable = true)
+    private WebService webService;
 
-    public void setColumns(final Set<OfficeUiColumn> columns) {
-        this.columns = columns;
-    }
-
-    /**
-     * @return Long return the id
-     */
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getClassName() {
+        return this.className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getAttributeName() {
+        return this.attributeName;
+    }
+
+    public void setAttributeName(String attributeName) {
+        this.attributeName = attributeName;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getPublicName() {
-        return publicName;
+        return this.publicName;
     }
 
     public void setPublicName(String publicName) {
         this.publicName = publicName;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return String return the className
-     */
-    public String getClassName() {
-        return className;
-    }
-
-    /**
-     * @param className the className to set
-     */
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    /**
-     * @return String return the attributeName
-     */
-    public String getAttributeName() {
-        return attributeName;
-    }
-
-    /**
-     * @param attributeName the attributeName to set
-     */
-    public void setAttributeName(String attributeName) {
-        this.attributeName = attributeName;
-    }
-
-    /**
-     * @return String return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     * @return Set<Tab> return the tabs
-     */
     public Set<Tab> getTabs() {
-        return tabs;
+        return this.tabs;
     }
 
-    /**
-     * @param tabs the tabs to set
-     */
     public void setTabs(Set<Tab> tabs) {
         this.tabs = tabs;
     }
 
-    /**
-     * @return com.channel.content.models.Table return the table
-     */
     public com.channel.content.models.Table getTable() {
-        return table;
+        return this.table;
     }
 
-    /**
-     * @param table the table to set
-     */
     public void setTable(com.channel.content.models.Table table) {
         this.table = table;
+    }
+
+    public Set<OfficeUiColumn> getColumns() {
+        return this.columns;
+    }
+
+    public void setColumns(Set<OfficeUiColumn> columns) {
+        this.columns = columns;
+    }
+
+    public WebService getWebService() {
+        return this.webService;
+    }
+
+    public void setWebService(WebService webService) {
+        this.webService = webService;
+    }
+
+    public Element id(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Element className(String className) {
+        this.className = className;
+        return this;
+    }
+
+    public Element attributeName(String attributeName) {
+        this.attributeName = attributeName;
+        return this;
+    }
+
+    public Element type(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public Element publicName(String publicName) {
+        this.publicName = publicName;
+        return this;
+    }
+
+    public Element tabs(Set<Tab> tabs) {
+        this.tabs = tabs;
+        return this;
+    }
+
+    public Element table(com.channel.content.models.Table table) {
+        this.table = table;
+        return this;
+    }
+
+    public Element columns(Set<OfficeUiColumn> columns) {
+        this.columns = columns;
+        return this;
+    }
+
+    public Element webService(WebService webService) {
+        this.webService = webService;
+        return this;
     }
 }

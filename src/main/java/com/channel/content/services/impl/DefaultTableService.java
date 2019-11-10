@@ -2,7 +2,6 @@ package com.channel.content.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -12,21 +11,16 @@ import com.channel.content.factories.impl.OfficeUiTableColumnFactory;
 import com.channel.content.models.Element;
 import com.channel.content.models.Table;
 import com.channel.content.repositories.TableRepository;
-import com.channel.content.services.CatalogWebService;
 import com.channel.content.services.TableService;
 import com.channel.content.strategies.JsonEntityToMapStrategy;
 
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 @Component("tableService")
 public class DefaultTableService implements TableService {
 
     @Resource
     private OfficeUiTableColumnFactory officeUiTableColumnFactory;
-
-    @Resource
-    private CatalogWebService CatalogWebService;
 
     @Resource
     private JsonEntityToMapStrategy jsonEntityToMapStrategy;
@@ -51,15 +45,5 @@ public class DefaultTableService implements TableService {
             counter++;
         }
         return list;
-    }
-
-    @Override
-    public List<Map<String, Object>> getTableValues(final Table table) {
-        final String entityName = table.getClassName();
-        final String elements = this.CatalogWebService.getCatalogElements(entityName);
-        if (!StringUtils.isEmpty(elements)) {
-            return this.jsonEntityToMapStrategy.convert(elements, table);
-        }
-        return null;
     }
 }

@@ -25,4 +25,4 @@ POST http://{{enviroment}}/tables HTTP/1.1
 
 
 ###
-GET http://{{enviroment}}/list/product HTTP/1.1
+GET http://{{enviroment}}/list/product?attributes=name HTTP/1.1

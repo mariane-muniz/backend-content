@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -36,45 +38,70 @@ public class Table extends AbstractAudit {
     )
     private Set<Element> columns;
 
-    /**
-     * @return Long return the id
-     */
-    public Long getId() {
-        return id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "main_service_id", nullable = true)
+    private WebService mainService;
+
+    @Column
+    private String path;
+
+    public String getPath() {
+        return this.path;
     }
 
-    /**
-     * @param id the id to set
-     */
+    public void setPath(final String path) {
+        this.path = path;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * @return String return the className
-     */
     public String getClassName() {
-        return className;
+        return this.className;
     }
 
-    /**
-     * @param className the className to set
-     */
     public void setClassName(String className) {
         this.className = className;
     }
 
-    /**
-     * @return Set<Element> return the columns
-     */
     public Set<Element> getColumns() {
-        return columns;
+        return this.columns;
     }
 
-    /**
-     * @param columns the columns to set
-     */
     public void setColumns(Set<Element> columns) {
         this.columns = columns;
+    }
+
+    public WebService getMainService() {
+        return this.mainService;
+    }
+
+    public void setMainService(WebService mainService) {
+        this.mainService = mainService;
+    }
+
+    public Table id(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Table className(String className) {
+        this.className = className;
+        return this;
+    }
+
+    public Table columns(Set<Element> columns) {
+        this.columns = columns;
+        return this;
+    }
+
+    public Table mainService(WebService mainService) {
+        this.mainService = mainService;
+        return this;
     }
 }
